@@ -1,5 +1,5 @@
 import { SearchbarHeader, SearchbarForm, SearchbarButton, SearchbarInput } from "./Searchbar-style"
-
+import PropTypes from 'prop-types';
 
 
 export const Searchbar = ({ handleSubmit, }) => {
@@ -19,4 +19,9 @@ export const Searchbar = ({ handleSubmit, }) => {
             </SearchbarForm>
         </SearchbarHeader>
     )
+}
+
+
+Searchbar.propTypes = {
+    handleSubmit: PropTypes.func.isRequired
 }
