@@ -2,7 +2,7 @@ import { SearchbarHeader, SearchbarForm, SearchbarButton, SearchbarInput } from 
 import PropTypes from 'prop-types';
 
 
-export const Searchbar = ({ handleSubmit, }) => {
+export const Searchbar = ({ handleSubmit, handleChange, value }) => {
     return (
         <SearchbarHeader className="searchbar">
             <SearchbarForm  onSubmit={handleSubmit}>
@@ -10,10 +10,13 @@ export const Searchbar = ({ handleSubmit, }) => {
 
                 <SearchbarInput
                     className="input"
+                    name="value"
                     type="text"
                     autoComplete="off"
                     autoFocus
                     placeholder="Search images and photos"
+                    onChange={handleChange}
+                    value={value}
               
                 />
             </SearchbarForm>

@@ -35,22 +35,35 @@ export class App extends Component {
     error: '',
     numPage: 1,
     modal: false,
-    modalImage: ''
+    modalImage: '',
+    value:''
 
   }
 
   
+
+  handleChange = ({ target }) => {
+    this.setState({
+      [target.name]: target.value,
+    });
+  };
     
   handleSubmit = (e) => {
     e.preventDefault()
     galleryImages.resetPage()
-    this.setState({ searchQuery: e.target[1].value.trim() })
+    // this.setState({ searchQuery: e.target[1].value.trim() })
     // console.log(e.target[1].value.trim())
     if (this.state.searchQuery === e.target[1].value.trim()) {
       Notiflix.Notify.warning('The request for this value has already been processed, please enter another value');
       return
     }
-    e.target.reset()
+
+    this.setState({
+      searchQuery: this.state.value,
+      value: ''
+    })
+
+    
   
   }
 
@@ -189,10 +202,10 @@ export class App extends Component {
   }
 
   render() {
-    const { images, status, error, modal, modalImage } = this.state
+    const { images, status, error, modal, modalImage,  value } = this.state
     return(
       <>
-      <Searchbar handleSubmit={this.handleSubmit} />
+        <Searchbar handleSubmit={this.handleSubmit} handleChange={this.handleChange} value={value} />
         <Container>
           <ImageGallery onClick={this.clickGalleryItem} images={images} />
           {status === STATUS.FULFILLED && <Button handleClick={this.handleClick} />}
