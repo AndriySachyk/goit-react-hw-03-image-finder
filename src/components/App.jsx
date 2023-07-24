@@ -36,7 +36,7 @@ export class App extends Component {
     numPage: 1,
     modal: false,
     modalImage: '',
-    value:''
+    // value:''
 
   }
 
@@ -51,16 +51,13 @@ export class App extends Component {
   handleSubmit = (e) => {
     e.preventDefault()
     galleryImages.resetPage()
-    // this.setState({ searchQuery: e.target[1].value.trim() })
-    // console.log(e.target[1].value.trim())
     if (this.state.searchQuery === e.target[1].value.trim()) {
       Notiflix.Notify.warning('The request for this value has already been processed, please enter another value');
       return
     }
 
     this.setState({
-      searchQuery: this.state.value,
-      value: ''
+      searchQuery: e.target[1].value.trim(),
     })
 
     
@@ -130,8 +127,7 @@ export class App extends Component {
       const result = await galleryImages.getGallery(this.state.searchQuery);
       const totalHits = Math.round(result.totalHits / galleryImages.perPage);
       const thisPage = galleryImages.page;
-      // console.log(totalHits, 'total')
-      // console.log(thisPage, 'thisPage')
+
 
       
 
@@ -143,7 +139,6 @@ export class App extends Component {
           images: [...state.images, ...result.hits]
         }
       });
-      // console.log(this.state.images)
       if (thisPage > totalHits) {
         Notiflix.Notify.failure(
           "We're sorry, but you've reached the end of search results."
@@ -205,7 +200,7 @@ export class App extends Component {
     const { images, status, error, modal, modalImage,  value } = this.state
     return(
       <>
-        <Searchbar handleSubmit={this.handleSubmit} handleChange={this.handleChange} value={value} />
+        <Searchbar handleSubmit={this.handleSubmit}  />
         <Container>
           <ImageGallery onClick={this.clickGalleryItem} images={images} />
           {status === STATUS.FULFILLED && <Button handleClick={this.handleClick} />}
