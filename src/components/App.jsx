@@ -197,7 +197,7 @@ export class App extends Component {
   }
 
   render() {
-    const { images, status, error, modal, modalImage,  value } = this.state
+    const { images, status, error, modal, modalImage,  } = this.state
     return(
       <>
         <Searchbar handleSubmit={this.handleSubmit}  />
